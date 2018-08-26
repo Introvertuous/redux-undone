@@ -9,7 +9,13 @@ export default (state = initialState, { type, payload }) =>
   produce(state, draft => {
     switch (type) {
       case ADD_TODO: {
-        draft.todos.push(payload);
+        const { done, value, index } = payload;
+        const todo = { done, value };
+        if (index === -1) {
+          draft.todos.push(todo);
+        } else {
+          draft.todos.splice(index, 0, todo);
+        }
         break;
       }
 

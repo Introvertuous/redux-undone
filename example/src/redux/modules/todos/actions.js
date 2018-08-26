@@ -1,9 +1,9 @@
 import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from './types';
 import { indexOf, getTodo, getTodos } from './selectors';
 
-const addTodo = (value, done = false) => ({
+const addTodo = (value, index = -1, done = false) => ({
   type: ADD_TODO,
-  payload: { value, done },
+  payload: { value, index, done },
 });
 
 const updateTodo = (index, done = true) => ({
@@ -27,14 +27,14 @@ export const attemptUpdateTodo = (value, done) => (dispatch, getState) => {
   return dispatch(updateTodo(index, done));
 };
 
-export const attemptAddTodo = value => (dispatch, getState) => {
+export const attemptAddTodo = (value, index) => (dispatch, getState) => {
   const state = getState();
 
   if (indexOf(state, value) !== -1) {
     return Promise.resolve();
   }
 
-  return dispatch(addTodo(value));
+  return dispatch(addTodo(value, index));
 };
 
 export const attemptRemoveTodo = value => (dispatch, getState) => {

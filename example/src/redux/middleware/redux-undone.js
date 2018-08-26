@@ -4,34 +4,40 @@ export const REDO = 'REDO';
 export const undo = () => ({ type: UNDO });
 export const redo = () => ({ type: REDO });
 
-const past = [];
+const history = {
+  past: [],
+  future: [],
+};
 
 export default ({
   undoType = UNDO,
   redoType = REDO,
   transformers,
 }) => store => next => action => {
-  if (action.skipHistory) {
-    return next(action);
-  }
-
-  const dispatch = action => {
-    if (typeof action === 'function') {
-      return action(dispatch, store.getState);
-    }
-    return store.dispatch({ ...action, skipHistory: true });
+  const createDispatch = undoneFrom => {
+    const dispatch = action => {
+      if (typeof action === 'function') {
+        return action(dispatch, store.getState);
+      }
+      return store.dispatch({ ...action, undoneFrom });
+    };
+    return dispatch;
   };
 
-  if (action.type === undoType) {
-    if (past.length === 0) {
+  const { type, payload, undoneFrom } = action;
+
+  if (type === undoType || type === redoType) {
+    const which = type === undoType ? 'past' : 'future';
+    const category = history[which];
+    if (category.length === 0) {
       return;
     }
 
-    const pastEntry = past.pop();
-    const transformer = transformers[pastEntry.type];
+    const entry = category.pop();
+    const transformer = transformers[entry.type];
     const transformed = transformer.set(
-      { getState: store.getState, dispatch },
-      pastEntry.payload
+      { getState: store.getState, dispatch: createDispatch(which) },
+      entry.payload
     );
 
     if (!transformed) {
@@ -41,15 +47,26 @@ export default ({
     return next(transformed);
   }
 
-  const transformer = transformers[action.type];
+  const transformer = transformers[type];
+
+  if (!!undoneFrom) {
+    const which = undoneFrom === 'past' ? 'future' : 'past';
+    const category = history[which];
+    category.push({
+      type: type,
+      payload: transformer.get(store, payload),
+    });
+    return next(action);
+  }
 
   if (!transformer) {
     return next(action);
   }
 
-  past.push({
-    type: action.type,
-    payload: transformer.get(store, action.payload),
+  history.future = [];
+  history.past.push({
+    type,
+    payload: transformer.get(store, payload),
   });
   return next(action);
 };

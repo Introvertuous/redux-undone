@@ -1,0 +1,17 @@
+{
+  "name": "@dh/redux",
+  "version": "0.0.1",
+  "description": "Redux",
+  "main": "index.js",
+  "dependencies": {
+    "deep-diff": "^1.0.1",
+    "deepmerge": "^2.1.0",
+    "exocortex-redux-undo": "v1.0.0-beta9-9-7",
+    "immer": "^1.3.1",
+    "immutability-helper": "^2.6.5",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logic": "^0.12.3",
+    "reselect": "^3.0.1"
+  }
+}

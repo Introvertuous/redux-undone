@@ -11,18 +11,17 @@ export default {
     set: (store, payload) => {
       store.dispatch(attemptRemoveTodo(payload));
     },
-    get: (store, { value }) => {
-      return value;
-    },
+    get: (store, { value }) => value,
   },
+
   [REMOVE_TODO]: {
-    set: (store, payload) => {
-      store.dispatch(attemptAddTodo(payload));
+    set: (store, { value, index }) => {
+      store.dispatch(attemptAddTodo(value, index));
     },
     get: (store, payload) => {
       const state = store.getState();
-      const todo = getTodo(state, payload);
-      return todo.value;
+      const { value } = getTodo(state, payload);
+      return { value, index: payload };
     },
   },
 

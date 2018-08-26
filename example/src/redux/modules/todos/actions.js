@@ -27,14 +27,14 @@ export const attemptUpdateTodo = (value, done) => (dispatch, getState) => {
   return dispatch(updateTodo(index, done));
 };
 
-export const attemptAddTodo = (value, index) => (dispatch, getState) => {
+export const attemptAddTodo = (value, index, done) => (dispatch, getState) => {
   const state = getState();
 
   if (indexOf(state, value) !== -1) {
     return Promise.resolve();
   }
 
-  return dispatch(addTodo(value, index));
+  return dispatch(addTodo(value, index, done));
 };
 
 export const attemptRemoveTodo = value => (dispatch, getState) => {

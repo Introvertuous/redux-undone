@@ -1,9 +1,5 @@
 import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from './types';
-import {
-  attemptRemoveTodo,
-  attemptAddTodo,
-  attemptUpdateTodo,
-} from './actions';
+import { attemptRemoveTodo, attemptAddTodo } from './actions';
 import { getTodo } from './selectors';
 
 export default {
@@ -15,23 +11,13 @@ export default {
   },
 
   [REMOVE_TODO]: {
-    set: (store, { value, index }) => {
-      store.dispatch(attemptAddTodo(value, index));
+    set: (store, { value, done, index }) => {
+      store.dispatch(attemptAddTodo(value, index, done));
     },
     get: (store, payload) => {
       const state = store.getState();
-      const { value } = getTodo(state, payload);
-      return { value, index: payload };
-    },
-  },
-
-  [UPDATE_TODO]: {
-    set: (store, { value, done }) => {
-      store.dispatch(attemptUpdateTodo(value, done));
-    },
-    get: (store, { index }) => {
-      const state = store.getState();
-      return getTodo(state, index);
+      const { value, done } = getTodo(state, payload);
+      return { value, done, index: payload };
     },
   },
 };

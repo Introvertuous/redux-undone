@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from './types';
+import { ADD_TODO, REMOVE_TODO } from './types';
 import { attemptRemoveTodo, attemptAddTodo } from './actions';
 import { getTodo } from './selectors';
 
@@ -11,8 +11,8 @@ export default {
   },
 
   [REMOVE_TODO]: {
-    set: (store, { value, done, index }) => {
-      store.dispatch(attemptAddTodo(value, index, done));
+    set: (store, todo) => {
+      store.dispatch(attemptAddTodo(todo));
     },
     get: (store, payload) => {
       const state = store.getState();

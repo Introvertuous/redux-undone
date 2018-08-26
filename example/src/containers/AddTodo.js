@@ -9,7 +9,7 @@ class AddTodo extends Component {
 
   onKeyDown = ev => {
     if (ev.key === 'Enter') {
-      this.props.attemptAddTodo(this.state.value);
+      this.props.attemptAddTodo({ value: this.state.value });
     }
   };
 

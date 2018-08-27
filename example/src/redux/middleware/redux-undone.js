@@ -26,10 +26,10 @@ export default ({
       }
 
       const transformer = transformers[action.type];
-
+      const state = store.getState();
       entries.push({
         type: action.type,
-        payload: transformer.get(store.getState(), action.payload),
+        payload: transformer.get(state, action.payload),
       });
 
       return store.dispatch({ ...action, skipReduxUndone: true });
@@ -63,10 +63,11 @@ export default ({
     return next(action);
   }
 
+  const state = store.getState();
   history.future = [];
   history.past.push({
     type,
-    payload: transformer.get(store.getState(), payload),
+    payload: transformer.get(state, payload),
   });
   return next(action);
 };

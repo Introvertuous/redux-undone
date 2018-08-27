@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 export const UNDO = 'UNDO';
 export const REDO = 'REDO';
 
@@ -14,7 +16,7 @@ export default ({
   redoType = REDO,
   transformers,
 }) => store => next => action => {
-  const { type, payload, skipReduxUndone } = action;
+  const { type, payload } = action;
 
   const createDispatch = undoneFrom => {
     const category = undoneFrom === 'past' ? 'future' : 'past';
@@ -32,7 +34,10 @@ export default ({
         payload: transformer.get(state, action.payload),
       });
 
-      return store.dispatch({ ...action, skipReduxUndone: true });
+      return store.dispatch({
+        ...action,
+        meta: { reduxUndone: { skip: true } },
+      });
     };
 
     return dispatch;
@@ -59,7 +64,7 @@ export default ({
 
   const transformer = transformers[type];
 
-  if (!!skipReduxUndone || !transformer) {
+  if (get(action, 'meta.reduxUndone.skip') || !transformer) {
     return next(action);
   }
 

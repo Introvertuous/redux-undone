@@ -39,13 +39,13 @@ export default ({
   };
 
   if (type === undoType || type === redoType) {
-    const which = type === undoType ? 'past' : 'future';
-    const category = history[which];
-    if (category.length === 0) {
+    const category = type === undoType ? 'past' : 'future';
+    const entries = history[category];
+    if (entries.length === 0) {
       return;
     }
 
-    const entry = category.pop();
+    const entry = entries.pop();
     const transformer = transformers[entry.type];
     const dispatch = createDispatch(category);
     const transformed = transformer.set(dispatch, entry.payload);

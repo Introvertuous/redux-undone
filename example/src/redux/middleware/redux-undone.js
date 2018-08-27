@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import merge from 'deepmerge';
 
 export const UNDO = 'UNDO';
 export const REDO = 'REDO';
@@ -34,10 +35,9 @@ export default ({
         payload: transformer.get(state, action.payload),
       });
 
-      return store.dispatch({
-        ...action,
-        meta: { reduxUndone: { skip: true } },
-      });
+      return store.dispatch(
+        merge(action, { meta: { reduxUndone: { skip: true } } })
+      );
     };
 
     return dispatch;

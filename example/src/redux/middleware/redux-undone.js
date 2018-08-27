@@ -14,17 +14,29 @@ export default ({
   redoType = REDO,
   transformers,
 }) => store => next => action => {
+  const { type, payload, skipReduxUndone } = action;
+
   const createDispatch = undoneFrom => {
+    const category = undoneFrom === 'past' ? 'future' : 'past';
+    const entries = history[category];
+
     const dispatch = action => {
       if (typeof action === 'function') {
         return action(dispatch, store.getState);
       }
-      return store.dispatch({ ...action, undoneFrom });
+
+      const transformer = transformers[action.type];
+
+      entries.push({
+        type: action.type,
+        payload: transformer.get(store.getState(), action.payload),
+      });
+
+      return store.dispatch({ ...action, skipReduxUndone: true });
     };
+
     return dispatch;
   };
-
-  const { type, payload, undoneFrom } = action;
 
   if (type === undoType || type === redoType) {
     const which = type === undoType ? 'past' : 'future';
@@ -49,17 +61,7 @@ export default ({
 
   const transformer = transformers[type];
 
-  if (!!undoneFrom) {
-    const which = undoneFrom === 'past' ? 'future' : 'past';
-    const category = history[which];
-    category.push({
-      type: type,
-      payload: transformer.get(store, payload),
-    });
-    return next(action);
-  }
-
-  if (!transformer) {
+  if (!!skipReduxUndone || !transformer) {
     return next(action);
   }
 

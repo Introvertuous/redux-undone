@@ -47,10 +47,8 @@ export default ({
 
     const entry = category.pop();
     const transformer = transformers[entry.type];
-    const transformed = transformer.set(
-      { getState: store.getState, dispatch: createDispatch(which) },
-      entry.payload
-    );
+    const dispatch = createDispatch(category);
+    const transformed = transformer.set(dispatch, entry.payload);
 
     if (!transformed) {
       return;
@@ -68,7 +66,7 @@ export default ({
   history.future = [];
   history.past.push({
     type,
-    payload: transformer.get(store, payload),
+    payload: transformer.get(store.getState(), payload),
   });
   return next(action);
 };

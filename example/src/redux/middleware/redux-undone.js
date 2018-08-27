@@ -54,7 +54,7 @@ export default ({
       return;
     }
 
-    return next(transformed);
+    return dispatch(transformed);
   }
 
   const transformer = transformers[type];

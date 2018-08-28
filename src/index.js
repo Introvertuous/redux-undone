@@ -1,18 +1,18 @@
 import get from 'lodash.get';
 import merge from 'deepmerge';
 
-export const UNDO = 'UNDO';
-export const REDO = 'REDO';
+const UNDO = 'UNDO';
+const REDO = 'REDO';
 
-export const undo = () => ({ type: UNDO });
-export const redo = () => ({ type: REDO });
+const undo = () => ({ type: UNDO });
+const redo = () => ({ type: REDO });
 
 const history = {
   past: [],
   future: [],
 };
 
-export default ({
+const createMiddleware = ({
   undoType = UNDO,
   redoType = REDO,
   transformers,
@@ -75,4 +75,12 @@ export default ({
     payload: transformer.get(state, payload),
   });
   return next(action);
+};
+
+export default {
+  UNDO,
+  REDO,
+  undo,
+  redo,
+  createMiddleware,
 };

@@ -12,7 +12,7 @@ const history = {
   future: [],
 };
 
-export default ({
+export const createMiddleware = ({
   undoType = UNDO,
   redoType = REDO,
   transformers,

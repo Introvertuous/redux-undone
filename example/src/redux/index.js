@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { reducers, transformers } from './modules';
-import undoable from './middleware/redux-undone';
+import undoable from '../../../dist';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 

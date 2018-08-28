@@ -4,9 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "deepmerge": "^2.1.1",
     "immer": "^1.5.0",
-    "lodash.get": "^4.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-icon-base": "^2.1.2",
@@ -24,13 +22,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.11.1",
-    "prettier": "^1.14.2",
     "redux-devtools-extension": "^2.13.5"
   }
 }

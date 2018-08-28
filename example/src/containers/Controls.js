@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { undo, redo } from 'redux/middleware/redux-undone';
+import { undo, redo } from '../../../dist';
 import UndoIcon from 'components/icons/Undo';
 import RedoIcon from 'components/icons/Redo';
 

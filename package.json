@@ -1,7 +1,8 @@
 {
   "name": "redux-undone",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "Redo / Undo For Redux",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "engines": {
@@ -16,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/Introvertuous/redux-undone/issues"
   },
-  "homepage": "https://github.com/Introvertuous/redux-undone#readme",
+  "homepage": "https://github.com/Introvertuous/redux-undone",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",

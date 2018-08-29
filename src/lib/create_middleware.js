@@ -5,7 +5,7 @@ import { UNDO, REDO } from './types';
 
 const history = { past: [], future: [] };
 
-export default ({ transformers }) => store => next => action => {
+export default transformers => store => next => action => {
   if (action.type === UNDO || action.type === REDO) {
     let activeEntries = [];
     let oppositeEntries = [];

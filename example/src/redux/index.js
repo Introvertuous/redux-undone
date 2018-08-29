@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 export default () => {
   const rootReducer = combineReducers(reducers);
-  const middleware = [thunk, undone.createMiddleware({ transformers })];
+  const middleware = [thunk, undone.createMiddleware(transformers)];
   const composeEnhancers = composeWithDevTools({});
 
   return createStore(

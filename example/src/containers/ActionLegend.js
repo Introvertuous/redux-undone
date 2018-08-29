@@ -9,7 +9,7 @@ export default () => (
     <table className="legend-table">
       <tbody>
         <tr>
-          <th className="legend-header">Action</th>
+          <th className="legend-header">Action Type</th>
           <th className="legend-header">Undoable</th>
         </tr>
 

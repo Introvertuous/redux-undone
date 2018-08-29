@@ -7,7 +7,6 @@ const App = () => (
   <Fragment>
     <Controls />
     <section className="container">
-      <h2 className="header">Legend</h2>
       <ActionLegend />
       <h2 className="header">Todos</h2>
       <Todos />

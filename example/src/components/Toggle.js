@@ -19,7 +19,7 @@ class Toggle extends Component {
     if (!checked) {
       return <CircleOutlineIcon {...iconProps} />;
     }
-    return <CircleCheckIcon {...iconProps} />;
+    return <CircleCheckIcon {...iconProps} color="lightcoral" />;
   }
 }
 

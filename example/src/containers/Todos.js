@@ -5,7 +5,7 @@ import AddTodo from './AddTodo';
 import Todo from './Todo';
 
 const Todos = ({ entries }) => (
-  <div className="todos-container">
+  <div className="panel">
     <AddTodo />
     <ol className="todos">
       {entries.map(({ value, done }) => (

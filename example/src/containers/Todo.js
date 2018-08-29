@@ -6,6 +6,7 @@ import {
 } from 'redux/modules/todos/actions';
 import Toggle from 'components/Toggle';
 import CloseIcon from 'components/icons/Close';
+import classnames from 'classnames';
 
 class Todo extends Component {
   onToggleClick = (id, done) => {
@@ -23,10 +24,9 @@ class Todo extends Component {
     return (
       <li className="todo">
         <label
-          className="todo-text"
-          style={{
-            textDecoration: done && 'line-through',
-          }}
+          className={classnames('todo-text', {
+            ['todo-text-active']: done,
+          })}
         >
           {value}
         </label>

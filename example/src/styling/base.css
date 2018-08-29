@@ -6,11 +6,14 @@ body {
   width: 100%;
   max-width: 625px;
   margin: 16px;
+  user-select: none;
 }
 
-.todos-container {
+.panel {
+  font: 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   margin: 16px 52px 16px 52px;
+  background-color: white;
 }
 
 .todos > li {
@@ -24,7 +27,6 @@ body {
   font-weight: 900;
   font: 36px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: grey;
-  user-select: none;
 }
 
 .icon {
@@ -34,8 +36,19 @@ body {
   cursor: pointer;
 }
 
+.icon-active {
+  color: lightcoral;
+}
+
+.icon:active {
+  color: lightcoral;
+}
+
+.icon:hover {
+  color: lightcoral;
+}
+
 .todo {
-  user-select: none;
   height: 58px;
   padding: 8px;
   width: 100%;
@@ -45,7 +58,6 @@ body {
   justify-content: space-between;
   background-color: white;
   border: none;
-  font: 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .todo-text {
@@ -56,6 +68,11 @@ body {
   overflow: hidden;
   margin-right: 4px;
   position: relative;
+}
+
+.todo-text-active {
+  text-decoration: line-through;
+  text-decoration-color: lightcoral;
 }
 
 .controls {
@@ -69,4 +86,23 @@ body {
 
 .controls > * {
   margin: 6px;
+}
+
+.legend {
+  padding: 0.5em;
+}
+
+.legend-header {
+  font-size: 20px;
+  color: #555555;
+}
+
+.legend-row {
+  font-size: 18px;
+  padding: 0.25em;
+  background-color: lightgrey;
+}
+
+.legend-table {
+  width: 100%;
 }

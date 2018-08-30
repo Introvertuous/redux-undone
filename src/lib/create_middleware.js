@@ -6,6 +6,34 @@ import { UNDO, REDO } from './types';
 const history = { past: [], future: [] };
 
 export default transformers => store => next => action => {
+  const dispatch = action => {
+    if (typeof action === 'function') {
+      return action(dispatch, store.getState);
+    }
+
+    return store.dispatch(
+      merge(action, { meta: { reduxUndone: { skip: true } } })
+    );
+  };
+
+  const dispatchAndCreateTransformer = action => {
+    const oldState = store.getState();
+    const dispatchedAction = dispatch(action);
+    const newState = store.getState();
+
+    const transformerMethods = transformers[dispatchedAction.type];
+    if (!transformerMethods) {
+      throw new Error(`No transformation methods found for ${action.type}`);
+    }
+
+    const transformer = new ActionTransformer(
+      dispatchedAction,
+      transformerMethods
+    );
+    transformer.collect(oldState, newState);
+    return transformer;
+  };
+
   if (action.type === UNDO || action.type === REDO) {
     let activeEntries = [];
     let oppositeEntries = [];
@@ -22,35 +50,22 @@ export default transformers => store => next => action => {
       return;
     }
 
-    const dispatch = action => {
-      if (typeof action === 'function') {
-        return action(dispatch, store.getState);
-      }
-
-      const methodsOrTargetAction = transformers[action.type];
-      oppositeEntries.push(
-        new ActionTransformer(store.getState(), action, methodsOrTargetAction)
-      );
-
-      return store.dispatch(
-        merge(action, { meta: { reduxUndone: { skip: true } } })
-      );
-    };
-
     const transformer = activeEntries.pop();
-    return transformer.performTransformation(store.getState(), dispatch);
+    const transformed = transformer.getTransform(store.getState());
+    const nextTransformer = dispatchAndCreateTransformer(transformed);
+    oppositeEntries.push(nextTransformer);
+    return;
   }
 
-  const methodsOrTargetAction = transformers[action.type];
-
-  if (get(action, 'meta.reduxUndone.skip') || !methodsOrTargetAction) {
+  if (get(action, 'meta.reduxUndone.skip')) {
     return next(action);
   }
 
-  const state = store.getState();
   history.future = [];
-  history.past.push(
-    new ActionTransformer(state, action, methodsOrTargetAction)
-  );
-  return next(action);
+  try {
+    const nextTransformer = dispatchAndCreateTransformer(action);
+    history.past.push(nextTransformer);
+  } catch (err) {
+    return next(action);
+  }
 };

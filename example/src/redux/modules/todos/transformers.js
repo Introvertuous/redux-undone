@@ -4,18 +4,14 @@ import { getTodo } from './selectors';
 
 export default {
   [ADD_TODO]: {
-    transform: (state, dispatch, data) => {
-      dispatch(attemptRemoveTodo(data));
-    },
-    collect: (state, { value }) => value,
+    getTransform: (state, data) => attemptRemoveTodo(data),
+    collect: (oldState, newState, { value }) => value,
   },
 
   [REMOVE_TODO]: {
-    transform: (state, dispatch, data) => {
-      dispatch(attemptAddTodo(data));
-    },
-    collect: (state, payload) => {
-      const { value, done } = getTodo(state, payload);
+    getTransform: (state, data) => attemptAddTodo(data),
+    collect: (oldState, newState, payload) => {
+      const { value, done } = getTodo(oldState, payload);
       return { value, done, index: payload };
     },
   },

@@ -1,2 +1,2 @@
-export const UNDO = 'reduxUndone/UNDO';
-export const REDO = 'reduxUndone/REDO';
+export const UNDO = 'redux-undone/UNDO';
+export const REDO = 'redux-undone/REDO';

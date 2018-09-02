@@ -18,11 +18,18 @@ class Todo extends Component {
     this.props.attemptRemoveTodo(value);
   };
 
+  onIconMouseDown(ev) {
+    ev.stopPropagation();
+  }
+
   render() {
-    const { done, value } = this.props;
+    const { done, value, onMouseDown, active } = this.props;
 
     return (
-      <li className="todo">
+      <div
+        className={classnames('todo', { ['todo-active']: active })}
+        onMouseDown={onMouseDown}
+      >
         <label
           className={classnames('todo-text', {
             ['todo-text-active']: done,
@@ -30,9 +37,18 @@ class Todo extends Component {
         >
           {value}
         </label>
-        <CloseIcon className="icon" onClick={this.onRemoveClick} />
-        <Toggle id={value} checked={done} onClick={this.onToggleClick} />
-      </li>
+        <CloseIcon
+          className="icon"
+          onClick={this.onRemoveClick}
+          onMouseDown={this.onIconMouseDown}
+        />
+        <Toggle
+          id={value}
+          checked={done}
+          onClick={this.onToggleClick}
+          onMouseDown={this.onIconMouseDown}
+        />
+      </div>
     );
   }
 }

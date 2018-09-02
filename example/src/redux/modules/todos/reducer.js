@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from './types';
+import { ADD_TODO, REMOVE_TODO, UPDATE_TODO, SWAP_TODO } from './types';
 import produce from 'immer';
 
 const initialState = {
@@ -27,6 +27,12 @@ export default (state = initialState, { type, payload }) =>
       case UPDATE_TODO: {
         const { index, done } = payload;
         draft.todos[index].done = done;
+        break;
+      }
+
+      case SWAP_TODO: {
+        const { src, dst } = payload;
+        draft.todos.splice(dst, 0, draft.todos.splice(src, 1)[0]);
         break;
       }
 

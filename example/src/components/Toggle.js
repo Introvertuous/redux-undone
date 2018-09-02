@@ -9,11 +9,12 @@ class Toggle extends Component {
   };
 
   render() {
-    const { checked } = this.props;
+    const { checked, onMouseDown } = this.props;
 
     const iconProps = {
       onClick: this.onClick,
       className: 'icon',
+      onMouseDown,
     };
 
     if (!checked) {

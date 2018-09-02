@@ -1,5 +1,5 @@
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from './types';
-import { indexOf } from './selectors';
+import { ADD_TODO, REMOVE_TODO, UPDATE_TODO, SWAP_TODO } from './types';
+import { indexOf, getTodo } from './selectors';
 
 const addTodo = ({ value, index = -1, done = false }) => ({
   type: ADD_TODO,
@@ -14,6 +14,11 @@ const updateTodo = (index, done = true) => ({
 const removeTodo = index => ({
   type: REMOVE_TODO,
   payload: index,
+});
+
+const swapTodo = (src, dst) => ({
+  type: SWAP_TODO,
+  payload: { src, dst },
 });
 
 export const attemptUpdateTodo = (value, done) => (dispatch, getState) => {
@@ -35,6 +40,18 @@ export const attemptAddTodo = todo => (dispatch, getState) => {
   }
 
   return dispatch(addTodo(todo));
+};
+
+export const attemptSwapTodo = (src, dst) => (dispatch, getState) => {
+  const state = getState();
+
+  const srcTodo = getTodo(state, src);
+  const dstTodo = getTodo(state, dst);
+  if (srcTodo == null || dstTodo == null) {
+    return Promise.resolve();
+  }
+
+  return dispatch(swapTodo(src, dst));
 };
 
 export const attemptRemoveTodo = value => (dispatch, getState) => {

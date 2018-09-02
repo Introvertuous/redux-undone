@@ -41,7 +41,6 @@
     "react-icon-base": "^2.1.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
     "resolve": "1.6.0",
     "shortid": "^2.2.13",

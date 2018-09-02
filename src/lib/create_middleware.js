@@ -5,20 +5,27 @@ import { UNDO, REDO } from './types';
 
 const history = { past: [], future: [] };
 
-export default transformers => store => next => action => {
-  const dispatch = action => {
+function dispatch(store, action) {
     if (typeof action === 'function') {
-      return action(dispatch, store.getState);
+    return action(dispatch.bind(null, store), store.getState);
     }
 
     return store.dispatch(
       merge(action, { meta: { reduxUndone: { skip: true } } })
     );
-  };
+}
 
-  const dispatchAndCreateTransformer = action => {
+function processAction(store, next, action) {
+  if (typeof action === 'function') {
+    return action(store.dispatch, store.getState);
+  }
+
+  return next(action);
+}
+
+function dispatchAndCreateTransformer(store, transformers, action) {
     const oldState = store.getState();
-    const dispatchedAction = dispatch(action);
+  const dispatchedAction = dispatch(store, action);
     const newState = store.getState();
 
     const transformerMethods = transformers[dispatchedAction.type];
@@ -32,8 +39,9 @@ export default transformers => store => next => action => {
     );
     transformer.collect(oldState, newState);
     return transformer;
-  };
+}
 
+export default transformers => store => next => action => {
   if (action.type === UNDO || action.type === REDO) {
     let activeEntries = [];
     let oppositeEntries = [];
@@ -51,21 +59,29 @@ export default transformers => store => next => action => {
     }
 
     const transformer = activeEntries.pop();
-    const transformed = transformer.getTransform(store.getState());
-    const nextTransformer = dispatchAndCreateTransformer(transformed);
+    const state = store.getState();
+    const transformed = transformer.getTransform(state);
+    const nextTransformer = dispatchAndCreateTransformer(
+      store,
+      transformers,
+      transformed
+    );
     oppositeEntries.push(nextTransformer);
     return;
   }
 
-  if (get(action, 'meta.reduxUndone.skip')) {
-    return next(action);
+    return processAction(store, next, action);
   }
 
   history.future = [];
   try {
-    const nextTransformer = dispatchAndCreateTransformer(action);
+    const nextTransformer = dispatchAndCreateTransformer(
+      store,
+      transformers,
+      action
+    );
     history.past.push(nextTransformer);
   } catch (err) {
-    return next(action);
+    return processAction(store, next, action);
   }
 };

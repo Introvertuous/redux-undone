@@ -48,8 +48,5 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "deepmerge": "^2.1.1",
-    "lodash.get": "^4.4.2"
-  }
+  "dependencies": {}
 }

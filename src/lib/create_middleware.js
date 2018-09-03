@@ -2,8 +2,7 @@ import merge from '../utils/merge';
 import has from '../utils/has';
 import ActionTransformer from './action_transformer';
 import { UNDO, REDO } from './types';
-
-const history = { past: [], future: [] };
+import history from './history';
 
 function dispatch(store, action) {
   if (typeof action === 'function') {
@@ -43,22 +42,14 @@ function dispatchAndCreateTransformer(store, transformers, action) {
 
 export default transformers => store => next => action => {
   if (action.type === UNDO || action.type === REDO) {
-    let activeEntries = [];
-    let oppositeEntries = [];
+    const active = action.type === UNDO;
+    const opposite = !active;
 
-    if (action.type === UNDO) {
-      activeEntries = history.past;
-      oppositeEntries = history.future;
-    } else {
-      activeEntries = history.future;
-      oppositeEntries = history.past;
-    }
-
-    if (activeEntries.length === 0) {
+    const transformer = history.pop(active);
+    if (transformer == null) {
       return;
     }
 
-    const transformer = activeEntries.pop();
     const state = store.getState();
     const transformed = transformer.getTransform(state);
     const nextTransformer = dispatchAndCreateTransformer(
@@ -66,7 +57,7 @@ export default transformers => store => next => action => {
       transformers,
       transformed
     );
-    oppositeEntries.push(nextTransformer);
+    history.push(opposite, nextTransformer);
     return;
   }
 
@@ -74,14 +65,14 @@ export default transformers => store => next => action => {
     return processAction(store, next, action);
   }
 
-  history.future = [];
   try {
     const nextTransformer = dispatchAndCreateTransformer(
       store,
       transformers,
       action
     );
-    history.past.push(nextTransformer);
+    history.clearFuture();
+    history.push(true, nextTransformer);
   } catch (err) {
     return processAction(store, next, action);
   }

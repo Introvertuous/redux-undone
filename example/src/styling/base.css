@@ -4,17 +4,36 @@ body {
 
 .container {
   width: 100%;
-  max-width: 625px;
-  margin: 16px;
+  margin-top: 22px;
   user-select: none;
+  display: flex;
+  flex-direction: row;
+  font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .panel {
-  font: 20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  margin: 16px 52px 16px 52px;
+  border: solid 2px grey;
   background-color: white;
-  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 22px;
+}
+
+.left-panel {
+  padding: 0 0 0 22px;
+  flex: 0 0 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.right-panel {
+  padding: 0 22px 16px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .todos > li {
@@ -26,13 +45,14 @@ body {
   margin: 0 0 8px 0;
   text-align: center;
   font-weight: 900;
-  font: 36px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: grey;
+  flex: none;
 }
 
 .icon {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   color: grey;
   cursor: pointer;
 }
@@ -50,15 +70,19 @@ body {
 }
 
 .todo {
-  height: 58px;
-  padding: 8px;
+  height: 40px;
+  padding: 6px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  border: none;
+  border: solid 1px transparent;
+}
+
+.todo-active {
+  border: solid 1px lightcoral;
 }
 
 .todo-text {
@@ -77,24 +101,43 @@ body {
 }
 
 .controls {
-  position: fixed;
-  top: 6px;
-  left: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: fit-content;
+  margin: 0;
+  flex: 0 0 34px;
+  border-left: none;
 }
 
-.controls > * {
+.controls > svg {
   margin: 6px;
 }
 
 .legend {
-  padding: 0.5em;
+  padding: 0.25em;
+}
+
+.history {
+}
+
+.history-entry {
+  padding: 6px;
+  color: black;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.history-header {
+  padding: 6px;
+  background-color: lightgrey;
+  color: black;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
 }
 
 .legend-header {
-  font-size: 20px;
+  font-size: 18px;
   color: #555555;
 }
 
@@ -102,8 +145,4 @@ body {
   font-size: 18px;
   padding: 0.25em;
   background-color: lightgrey;
-}
-
-.legend-table {
-  width: 100%;
 }

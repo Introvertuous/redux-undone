@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
-import classnames from 'classnames';
 import { types } from 'redux/modules';
 
 import { transformers } from 'redux/modules';
 
 export default () => (
-  <Fragment>
+  <section className="legend">
     <h2 className="header">Legend</h2>
-    <table className={classnames(['panel', 'legend'])}>
+    <table className="panel">
       <tbody>
         <tr>
           <th className="legend-header">Action Type</th>
@@ -24,5 +23,5 @@ export default () => (
         ))}
       </tbody>
     </table>
-  </Fragment>
+  </section>
 );

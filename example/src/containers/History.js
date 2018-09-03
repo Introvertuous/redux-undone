@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import classnames from 'classnames';
 import { history } from '../../../dist';
 
 function Category({ header, entries = [] }) {
@@ -36,13 +35,13 @@ export default class History extends Component {
     const future = history.getFuture();
 
     return (
-      <Fragment>
+      <section className="history">
         <h2 className="header">History</h2>
-        <ol className={classnames(['panel', 'history'])}>
+        <ol className="panel">
           <Category header="FUTURE" entries={future.reverse()} />
           <Category header="PAST" entries={past.reverse()} />
         </ol>
-      </Fragment>
+      </section>
     );
   }
 }

@@ -15,25 +15,8 @@ body {
   border: solid 2px grey;
   background-color: white;
   width: 100%;
-  max-width: 400px;
   margin-bottom: 22px;
-}
-
-.left-panel {
-  padding: 0 0 0 22px;
-  flex: 0 0 400px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.right-panel {
-  padding: 0 22px 16px 22px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-width: 400px;
 }
 
 .todos > li {
@@ -47,7 +30,6 @@ body {
   font-weight: 900;
   font: 22px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: grey;
-  flex: none;
 }
 
 .icon {
@@ -67,6 +49,20 @@ body {
 
 .icon:hover {
   color: lightcoral;
+}
+
+.todos-out {
+  padding: 0 22px 0 22px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.todos-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .todo {
@@ -112,27 +108,28 @@ body {
 }
 
 .legend {
-  padding: 0.25em;
+  padding: 0 0 0 1em;
+  flex: 0 0 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .history {
+  padding: 0 0 0 1em;
+  flex: 0 0 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .history-entry {
   padding: 6px;
   color: black;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 .history-header {
   padding: 6px;
   background-color: lightgrey;
   color: black;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
   text-align: center;
 }
 

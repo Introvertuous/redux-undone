@@ -15,29 +15,34 @@ class Todos extends Component {
   render() {
     const { entries } = this.props;
     return (
-      <div className="panel">
-        <AddTodo />
-        <Draggable.Group
-          disableRootEvents
-          as="ol"
-          className="todos"
-          onChange={this.onDrag}
-        >
-          {entries.map(({ value, done }) => (
-            <Draggable.Target key={value} as="li">
-              {({ eventHandlers, targetActive }) => (
-                <Todo
-                  active={targetActive}
-                  value={value}
-                  done={done}
-                  key={value}
-                  onMouseDown={eventHandlers.onPanStart}
-                />
-              )}
-            </Draggable.Target>
-          ))}
-        </Draggable.Group>
-      </div>
+      <section className="todos-out">
+        <div className="todos-in">
+          <h2 className="header">Todos</h2>
+          <div className="panel">
+            <AddTodo />
+            <Draggable.Group
+              disableRootEvents
+              as="ol"
+              className="todos"
+              onChange={this.onDrag}
+            >
+              {entries.map(({ value, done }) => (
+                <Draggable.Target key={value} as="li">
+                  {({ eventHandlers, targetActive }) => (
+                    <Todo
+                      active={targetActive}
+                      value={value}
+                      done={done}
+                      key={value}
+                      onMouseDown={eventHandlers.onPanStart}
+                    />
+                  )}
+                </Draggable.Target>
+              ))}
+            </Draggable.Group>
+          </div>
+        </div>
+      </section>
     );
   }
 }

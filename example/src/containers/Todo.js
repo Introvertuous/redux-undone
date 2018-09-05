@@ -26,7 +26,7 @@ class Todo extends Component {
     const { done, value, onMouseDown, active } = this.props;
 
     return (
-      <div
+      <li
         className={classnames('todo', { ['todo-active']: active })}
         onMouseDown={onMouseDown}
       >
@@ -48,7 +48,7 @@ class Todo extends Component {
           onClick={this.onToggleClick}
           onMouseDown={this.onIconMouseDown}
         />
-      </div>
+      </li>
     );
   }
 }

@@ -4,7 +4,7 @@ import { getTodos } from 'redux/modules/todos/selectors';
 import { attemptSwapTodo } from 'redux/modules/todos/actions';
 import AddTodo from './AddTodo';
 import Todo from './Todo';
-import Draggable from 'draggable';
+// import Draggable from 'draggable';
 
 class Todos extends Component {
   onDrag = (mutation = [0, 0]) => {
@@ -20,13 +20,17 @@ class Todos extends Component {
           <h2 className="header">Todos</h2>
           <div className="panel">
             <AddTodo />
+            {/*
             <Draggable.Group
               disableRootEvents
               as="ol"
               className="todos"
               onChange={this.onDrag}
             >
+            */}
+            <ol className="todos">
               {entries.map(({ value, done }) => (
+                /*
                 <Draggable.Target key={value} as="li">
                   {({ eventHandlers, targetActive }) => (
                     <Todo
@@ -38,8 +42,12 @@ class Todos extends Component {
                     />
                   )}
                 </Draggable.Target>
+                */
+                <Todo key={value} value={value} done={done} key={value} />
               ))}
-            </Draggable.Group>
+              {/*
+            </Draggable.Group>*/}
+            </ol>
           </div>
         </div>
       </section>

@@ -12,6 +12,7 @@ script:
   - npm run build
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
+  - npm run build-example
   - npm run deploy-example
 branches:
   except:

@@ -74,6 +74,6 @@ export default transformers => store => next => action => {
     history.clearFuture();
     history.push(true, nextTransformer);
   } catch (err) {
-    return processAction(store, next, action);
+    return;
   }
 };

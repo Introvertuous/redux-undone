@@ -1,6 +1,6 @@
 import isObject from './is_object';
 
-export default (src, dst) =>
+const merge = (src, dst) =>
   Object.entries(dst).reduce(
     (acc, [dstProperty, dstValue]) => {
       const srcValue = src[dstProperty];
@@ -12,3 +12,5 @@ export default (src, dst) =>
     },
     { ...src }
   );
+
+export default merge;

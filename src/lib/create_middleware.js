@@ -4,6 +4,17 @@ import ActionTransformer from './action_transformer';
 import { UNDO, REDO } from './types';
 import history from './history';
 
+const skippedProperties = ['meta.reduxUndone.skip'];
+
+function hasOneOf(obj, properties) {
+  for (let i = 0; i < properties.length; i++) {
+    if (has(obj, properties[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function dispatch(store, action) {
   if (typeof action === 'function') {
     return action(dispatch.bind(null, store), store.getState);
@@ -35,7 +46,7 @@ function createTransformer(action, methods, oldState, newState) {
   return transformer;
 }
 
-export default transformers => store => next => action => {
+export default (transformers, options = {}) => store => next => action => {
   if (action.type === UNDO || action.type === REDO) {
     const active = action.type === UNDO;
     const opposite = !active;
@@ -71,7 +82,12 @@ export default transformers => store => next => action => {
     return;
   }
 
-  if (has(action, 'meta.reduxUndone.skip')) {
+  if (
+    hasOneOf(action, [
+      ...skippedProperties,
+      ...(options.skippedProperties || []),
+    ])
+  ) {
     return processAction(store, next, action);
   }
 

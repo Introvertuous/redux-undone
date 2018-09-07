@@ -22,20 +22,15 @@ function processAction(store, next, action) {
   return next(action);
 }
 
-function dispatchAndCreateTransformer(store, transformers, action) {
+function performDispatch(store, action) {
   const oldState = store.getState();
   const dispatchedAction = dispatch(store, action);
   const newState = store.getState();
+  return { oldState, newState, dispatchedAction };
+}
 
-  const transformerMethods = transformers[dispatchedAction.type];
-  if (!transformerMethods) {
-    throw new Error(`No transformation methods found for ${action.type}`);
-  }
-
-  const transformer = new ActionTransformer(
-    dispatchedAction,
-    transformerMethods
-  );
+function createTransformer(action, methods, oldState, newState) {
+  const transformer = new ActionTransformer(action, methods);
   transformer.collect(oldState, newState);
   return transformer;
 }
@@ -52,11 +47,26 @@ export default transformers => store => next => action => {
 
     const state = store.getState();
     const transformed = transformer.getTransform(state);
-    const nextTransformer = dispatchAndCreateTransformer(
+
+    const { oldState, newState, dispatchedAction } = performDispatch(
       store,
-      transformers,
       transformed
     );
+
+    const methods = transformers[dispatchedAction.type];
+    if (!methods) {
+      throw new Error(
+        `No transformation methods found for ${dispatchedAction.type}`
+      );
+    }
+
+    const nextTransformer = createTransformer(
+      dispatchedAction,
+      methods,
+      oldState,
+      newState
+    );
+
     history.push(opposite, nextTransformer);
     return;
   }
@@ -65,15 +75,23 @@ export default transformers => store => next => action => {
     return processAction(store, next, action);
   }
 
-  try {
-    const nextTransformer = dispatchAndCreateTransformer(
-      store,
-      transformers,
-      action
-    );
-    history.clearFuture();
-    history.push(true, nextTransformer);
-  } catch (err) {
+  const { oldState, newState, dispatchedAction } = performDispatch(
+    store,
+    action
+  );
+
+  const methods = transformers[dispatchedAction.type];
+  if (!methods) {
     return;
   }
+
+  const nextTransformer = createTransformer(
+    dispatchedAction,
+    methods,
+    oldState,
+    newState
+  );
+
+  history.clearFuture();
+  history.push(true, nextTransformer);
 };

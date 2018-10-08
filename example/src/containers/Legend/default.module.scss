@@ -1,0 +1,17 @@
+.container {
+  padding: 0 0 0 1em;
+  flex: 0 0 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header {
+  font-size: 18px;
+  color: #555555;
+}
+
+.row {
+  font-size: 18px;
+  padding: 0.25em;
+  background-color: lightgrey;
+}

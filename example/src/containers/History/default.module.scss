@@ -1,0 +1,18 @@
+.container {
+  padding: 0 0 0 1em;
+  flex: 0 0 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.category {
+  padding: 6px;
+  color: black;
+}
+
+.header {
+  padding: 6px;
+  background-color: lightgrey;
+  color: black;
+  text-align: center;
+}

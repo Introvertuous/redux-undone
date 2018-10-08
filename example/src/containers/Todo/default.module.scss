@@ -1,0 +1,31 @@
+.container {
+  height: 40px;
+  padding: 6px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border: solid 1px transparent;
+  border-top: solid 2px #ededed;
+}
+
+.active {
+  border: solid 1px lightcoral;
+}
+
+.text {
+  color: black;
+  flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 4px;
+  position: relative;
+}
+
+.textActive {
+  text-decoration: line-through;
+  text-decoration-color: lightcoral;
+}

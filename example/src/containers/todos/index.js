@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getTodos } from 'redux/modules/todos/selectors';
 import { attemptSwapTodo } from 'redux/modules/todos/actions';
-import AddTodo from 'containers/AddTodo';
-import Todo from 'containers/Todo';
-import Card from 'components/Card';
+import AddTodo from 'containers/add_todo';
+import Todo from 'containers/todo';
+import Card from 'components/card';
 import styles from './default.module.scss';
 // import Draggable from 'draggable';
 

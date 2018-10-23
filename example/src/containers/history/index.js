@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import Card from 'components/Card';
+import Card from 'components/card';
 import { history } from '../../../../dist';
 import styles from './default.module.scss';
 
@@ -20,7 +20,7 @@ function Category({ header, entries = [] }) {
   );
 }
 
-export default class History extends Component {
+class History extends Component {
   componentDidMount() {
     /**
      * TODO: obviously we should not be triggering
@@ -44,3 +44,5 @@ export default class History extends Component {
     );
   }
 }
+
+export default History;

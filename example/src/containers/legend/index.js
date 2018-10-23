@@ -1,10 +1,10 @@
 import React from 'react';
 import { types } from 'redux/modules';
-import Card from 'components/Card';
+import Card from 'components/card';
 import { transformers } from 'redux/modules';
 import styles from './default.module.scss';
 
-export default () => (
+const Legend = () => (
   <Card className={styles.container} header="Legend" as="table">
     <tbody>
       <tr>
@@ -23,3 +23,5 @@ export default () => (
     </tbody>
   </Card>
 );
+
+export default Legend;

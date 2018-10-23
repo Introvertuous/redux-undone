@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CircleOutlineIcon from 'components/icons/CircleOutline';
-import CircleCheckIcon from 'components/icons/CircleCheck';
+import CircleOutlineIcon from 'components/icons/circle_outline';
+import CircleCheckIcon from 'components/icons/circle_check';
 
 class Toggle extends Component {
   onClick = () => {

@@ -4,8 +4,8 @@ import {
   attemptUpdateTodo,
   attemptRemoveTodo,
 } from 'redux/modules/todos/actions';
-import Toggle from 'components/Toggle';
-import CloseIcon from 'components/icons/Close';
+import Toggle from 'components/toggle';
+import CloseIcon from 'components/icons/close';
 import classnames from 'classnames';
 import styles from './default.module.scss';
 

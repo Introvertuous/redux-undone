@@ -1,7 +1,7 @@
 import React from 'react';
-import Base from './Base';
+import Base from 'components/icons/base';
 
-export default props => (
+const Close = props => (
   <Base {...props} viewBox="0 0 352 512">
     <path
       fill="currentColor"
@@ -9,3 +9,5 @@ export default props => (
     />
   </Base>
 );
+
+export default Close;

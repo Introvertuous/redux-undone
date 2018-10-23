@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { undo, redo } from '../../../../dist';
-import UndoIcon from 'components/icons/Undo';
-import RedoIcon from 'components/icons/Redo';
+import UndoIcon from 'components/icons/undo';
+import RedoIcon from 'components/icons/redo';
+import Card from 'components/card';
 import styles from './default.module.scss';
-import Card from 'components/Card';
 
 const Controls = props => (
   <Card as="div" className={styles.container}>

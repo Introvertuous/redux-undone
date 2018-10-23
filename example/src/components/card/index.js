@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './default.module.scss';
 
-const Content = ({ children, header, as, className }) => {
+const Card = ({ children, header, as, className }) => {
   const ContainerElement = as;
   return (
     <section className={className}>
@@ -13,4 +13,4 @@ const Content = ({ children, header, as, className }) => {
   );
 };
 
-export default Content;
+export default Card;

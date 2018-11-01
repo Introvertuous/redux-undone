@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import Card from 'components/card';
-import { history } from '../../../../dist';
+// import { history } from '../../../../dist';
 import styles from './default.module.scss';
 
 function Category({ header, entries = [] }) {
@@ -33,8 +33,10 @@ class History extends Component {
   }
 
   render() {
-    const past = history.getPast();
-    const future = history.getFuture();
+    const past = [];
+    // history.getPast();
+    const future = [];
+    // history.getFuture();
 
     return (
       <Card className={styles.container} header="History" as="ol">

@@ -1,9 +1,9 @@
 import reducer from './reducer';
-import transformers from './transformers';
+import transformer from './transformer';
 import types from './types';
 
 export default {
   reducer,
-  transformers,
+  transformer,
   types,
 };

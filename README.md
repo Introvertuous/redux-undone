@@ -31,31 +31,24 @@ export default () => {
 ```
 
 Transformers is an object with a property for each undo-able action type. If you
-do not include an action type, it is ignored by redux-undone (opt-in). Each
-transformer must provide two methods, `collect` and `getTransform`.
-
-`collect` is used to get and store the data needed for the transformation, when
-the action in question is dispatched. It is passed the state before and after
-the dispatch occurs and the action payload.
-
-`getTransform` returns either a thunk or an action representing the
-transformation from the original action. It is passed the current state and the
-data from `collect`.
+do not include a transformer for an action type, it is ignored by redux-undone
+(opt-in). A transformer is a function that is passed three parameters: the
+state before before the original action was dispatched, the state after the
+original action was dispatched, and the original action itself. The function
+must return either a thunk or an action, which represents the transformation
+from the original action.
 
 ```
 ...
 {
-  [ADD_TODO]: {
-    getTransform: (state, data) => attemptRemoveTodo(data),
-    collect: (oldState, newState, { value }) => value,
+  [ADD_TODO]: (prevState, nextState, action) => {
+    const { value } = action.payload;
+    return attemptRemoveTodo(value);
   },
-
-  [REMOVE_TODO]: {
-    getTransform: (state, data) => attemptAddTodo(data),
-    collect: (oldState, newState, payload) => {
-      const { value, done } = getTodo(oldState, payload);
-      return { value, done, index: payload };
-    },
+  [REMOVE_TODO]: (prevState, nextState, action) => {
+    const { payload } = action;
+    const { value, done } = getTodo(prevState, payload);
+    return attemptAddTodo({ value, done, index: payload });
   },
 }
 ...

@@ -1,8 +1,8 @@
-import merge from 'deepmerge';
-import { Action, Dispatch, Store } from 'redux';
+import { Action, AnyAction, Dispatch, Store } from 'redux';
 import { ThunkOrAction } from 'types/redux';
 import { ITransformers } from 'types/transform';
 import { hasOne } from 'utils/has';
+import merge from 'utils/merge';
 import { REDO, UNDO } from './actions';
 import History from './history';
 import logger from './logger';
@@ -16,7 +16,7 @@ function dispatch<S>(store: Store<S>, action: ThunkOrAction<S>) {
 
   const nonUndoableAction = merge(action, {
     meta: { reduxUndone: { skip: true } },
-  });
+  }) as AnyAction;
 
   store.dispatch(nonUndoableAction);
   return nonUndoableAction;

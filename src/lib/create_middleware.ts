@@ -47,7 +47,8 @@ interface IOptions {
 function createTransformer<S>(
   transformers: ITransformers<S>,
   store: Store<S>,
-  action: ThunkOrAction<S>
+  action: ThunkOrAction<S>,
+  undoing: boolean
 ) {
   const { oldState, newState, dispatchedAction } = performDispatch(
     store,
@@ -60,7 +61,7 @@ function createTransformer<S>(
     return null;
   }
 
-  return () => transformer(oldState, newState, dispatchedAction);
+  return () => transformer(oldState, newState, dispatchedAction, undoing);
 }
 
 function createMiddleware<S>(
@@ -82,7 +83,12 @@ function createMiddleware<S>(
       }
 
       const transformed = prevTransformer();
-      const transformer = createTransformer(transformers, store, transformed);
+      const transformer = createTransformer(
+        transformers,
+        store,
+        transformed,
+        undoing
+      );
       if (transformer === null) {
         return;
       }
@@ -102,7 +108,7 @@ function createMiddleware<S>(
       return;
     }
 
-    const transformer = createTransformer(transformers, store, action);
+    const transformer = createTransformer(transformers, store, action, true);
     if (transformer === null) {
       return;
     }

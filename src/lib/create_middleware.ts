@@ -87,7 +87,7 @@ function createMiddleware<S>(
         transformers,
         store,
         transformed,
-        undoing
+        !undoing
       );
       if (transformer === null) {
         return;

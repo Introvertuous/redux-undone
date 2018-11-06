@@ -1,9 +1,9 @@
 import { ThunkOrAction } from './redux';
 
 export type Transformer<S> = (
+  action: ThunkOrAction<S>,
   prevState: S,
   nextState: S,
-  action: ThunkOrAction<S>,
   undoing: boolean
 ) => ThunkOrAction<S>;
 

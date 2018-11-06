@@ -61,7 +61,7 @@ function createTransformer<S>(
     return null;
   }
 
-  return () => transformer(oldState, newState, dispatchedAction, undoing);
+  return () => transformer(dispatchedAction, oldState, newState, undoing);
 }
 
 function createMiddleware<S>(

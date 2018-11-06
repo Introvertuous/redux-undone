@@ -41,11 +41,11 @@ from the original action.
 ```
 ...
 {
-  [ADD_TODO]: (prevState, nextState, action) => {
+  [ADD_TODO]: (prevState, nextState, action, undoing) => {
     const { value } = action.payload;
     return attemptRemoveTodo(value);
   },
-  [REMOVE_TODO]: (prevState, nextState, action) => {
+  [REMOVE_TODO]: (prevState, nextState, action, undoing) => {
     const { payload } = action;
     const { value, done } = getTodo(prevState, payload);
     return attemptAddTodo({ value, done, index: payload });

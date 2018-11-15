@@ -5,7 +5,7 @@ import { hasOne } from 'utils/has';
 import merge from 'utils/merge';
 import { REDO, UNDO } from './actions';
 import History from './history';
-import logger from './logger';
+// import logger from './logger';
 
 const globallySkippedProperties = ['meta.reduxUndone.skip'];
 
@@ -57,7 +57,7 @@ function createTransformer<S>(
 
   const transformer = transformers[dispatchedAction.type];
   if (!transformer) {
-    logger.log(`No transformation found for ${dispatchedAction.type}`, 'warn');
+    // logger.log(`No transformation found for ${dispatchedAction.type}`, 'warn');
     return null;
   }
 

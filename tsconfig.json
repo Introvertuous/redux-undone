@@ -1,22 +1,9 @@
 {
+  "extends": "./node_modules/introvertuous-configurations/base/tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "allowJs": true,
+    "module": "es2015",
     "lib": ["es2017"],
     "target": "es6",
-    "baseUrl": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+    "baseUrl": "src"
+  }
 }

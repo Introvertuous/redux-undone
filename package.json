@@ -52,9 +52,9 @@
     "semantic-release": "semantic-release",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "build-example": "cd example && npm install && npm run build",
-    "deploy-example": "npm run build-example && gh-pages -d ./example/build",
-    "analyze": "npm run build && webpack-bundle-analyzer dist/index.js"
+    "build-example": "cd example && yarn && yarn build",
+    "deploy-example": "gh-pages -d ./example/build",
+    "analyze": "webpack-bundle-analyzer dist/index.js"
   },
   "files": [
     "dist"

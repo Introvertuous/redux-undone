@@ -4012,10 +4012,10 @@ into-stream@^4.0.0:
     from2 "^2.1.1"
     p-is-promise "^2.0.0"
 
-introvertuous-configurations@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/introvertuous-configurations/-/introvertuous-configurations-1.4.0.tgz#02c0fd79b4ac9b2061766101ca8f6721a6045644"
-  integrity sha512-hBsRXHq8lXU9+XbUTZINgzd8qfJ00YjC8qsb6emrcF8lMQRBuPe2x8YlKc0cGSEJXkDyCGCOgAaJ/mdJ0Es50A==
+introvertuous-configurations@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/introvertuous-configurations/-/introvertuous-configurations-1.4.2.tgz#68a88c86573acba8402978fad90e33579ac192ef"
+  integrity sha512-drI+nju8rd7ydvbp3Tq20hjhiIxniTX5VBBv4YPTOuknsOJhNtKacuoOZnozn9JUMv2HFvwZ57I3T30cXCyttQ==
   dependencies:
     findup "^0.1.5"
     prettier "^1.15.2"

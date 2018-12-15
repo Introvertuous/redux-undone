@@ -46,8 +46,8 @@
   "scripts": {
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
+    "build": "rimraf dist && rollup -c",
+    "start": "rimraf dist && rollup -c -w",
     "build-example": "cd example && yarn && yarn build",
     "commit": "npx git-cz"
   },

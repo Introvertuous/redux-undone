@@ -49,6 +49,8 @@
     "build": "rimraf dist && rollup -c",
     "start": "rimraf dist && rollup -c -w",
     "build-example": "cd example && yarn && yarn build",
+    "deploy-example": "gh-pages -d ./example/build",
+    "inject-build": "ts-node --project ./scripts/tsconfig.json ./scripts/inject-build",
     "commit": "npx git-cz"
   },
   "files": [

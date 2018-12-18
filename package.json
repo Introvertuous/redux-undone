@@ -24,6 +24,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "commitizen": "^3.0.5",
     "cz-conventional-changelog": "2.1.0",
     "gh-pages": "^1.2.0",
     "introvertuous-configurations": "^1.6.0",
@@ -55,7 +56,7 @@
     "build-example": "cd example && yarn && yarn build",
     "deploy-example": "gh-pages -d ./example/build",
     "inject-build": "ts-node --project ./scripts/tsconfig.json ./scripts/inject-build",
-    "commit": "npx git-cz"
+    "commit": "git-cz"
   },
   "files": [
     "dist"

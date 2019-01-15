@@ -55,6 +55,10 @@ function createTransformer<S>(
     action
   );
 
+  if (!dispatchedAction) {
+    return null;
+  }
+
   const transformer = transformers[dispatchedAction.type];
   if (!transformer) {
     // logger.log(`No transformation found for ${dispatchedAction.type}`, 'warn');

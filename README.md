@@ -1,6 +1,6 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![NPM: redux-undone](https://badge.fury.io/js/redux-undone.svg)](https://www.npmjs.com/package/redux-undone)
-[![Build Status](https://travis-ci.org/Introvertuous/redux-undone.svg?branch=master)](https://travis-ci.org/Introvertuous/redux-undone)
+[![Build Status](https://travis-ci.org/gibdig/redux-undone.svg?branch=master)](https://travis-ci.org/gibdig/redux-undone)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### Redux Undone

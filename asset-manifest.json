@@ -1,6 +1,13 @@
 {
-  "main.css": "static/css/main.2ebc2465.css",
-  "main.css.map": "static/css/main.2ebc2465.css.map",
-  "main.js": "static/js/main.8ab204c1.js",
-  "main.js.map": "static/js/main.8ab204c1.js.map"
+  "main.css": "/redux-undone/static/css/main.fec2531f.chunk.css",
+  "main.js": "/redux-undone/static/js/main.ce33048b.chunk.js",
+  "main.js.map": "/redux-undone/static/js/main.ce33048b.chunk.js.map",
+  "static/js/1.97fbc730.chunk.js": "/redux-undone/static/js/1.97fbc730.chunk.js",
+  "static/js/1.97fbc730.chunk.js.map": "/redux-undone/static/js/1.97fbc730.chunk.js.map",
+  "runtime~main.js": "/redux-undone/static/js/runtime~main.79c1685d.js",
+  "runtime~main.js.map": "/redux-undone/static/js/runtime~main.79c1685d.js.map",
+  "static/css/main.fec2531f.chunk.css.map": "/redux-undone/static/css/main.fec2531f.chunk.css.map",
+  "index.html": "/redux-undone/index.html",
+  "precache-manifest.e7db1720d9905aaafcb9828fc230d3e8.js": "/redux-undone/precache-manifest.e7db1720d9905aaafcb9828fc230d3e8.js",
+  "service-worker.js": "/redux-undone/service-worker.js"
 }
